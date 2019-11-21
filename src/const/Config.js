@@ -1,6 +1,8 @@
 //Основной файл конфигурации приложения
 /* eslint-disable no-magic-numbers */
 export default class Config {
+  static REDUX_DEV_TOOLS_TRACE_LIMIT = 30;
+  
   static DATA_API_URL = "https://randomuser.me/api/";
 
   static AUTH_LS_KEY = "authData";

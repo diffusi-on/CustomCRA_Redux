@@ -2,9 +2,10 @@ import CommonCss from "lib/common/Common.module.scss";
 
 import Css from "lib/pages/auth/AuthPage.module.scss";
 
+import * as MainActions from "actions/main";
+import * as ReactRedux from "react-redux";
 import * as Router from "react-router";
 import { bind } from "decko";
-import { inject } from "mobx-react";
 import Form from "lib/common/ui/form/Form";
 import FormValidations from "validations/FormValidations";
 import Input from "lib/common/ui/form/Input";
@@ -12,7 +13,6 @@ import React, { Component, Fragment } from "react";
 import RoutesConfig from "const/RoutesConfig";
 import classNames from "classnames";
 
-@inject("store")
 class AuthPage extends Component {
   render() {
     return (
@@ -49,7 +49,7 @@ class AuthPage extends Component {
 
   @bind
   handleAuthFormSubmit({ formState }) {
-    this.props.store.authUser(formState.login);
+    this.props.dispatch(MainActions.authUser(formState.login));
   }
 
   @bind
@@ -58,4 +58,7 @@ class AuthPage extends Component {
   }
 }
 
-export default Router.withRouter(AuthPage);
+export default ReactRedux.connect(
+  null,
+  (dispatch) => ({ dispatch })
+)(Router.withRouter(AuthPage));

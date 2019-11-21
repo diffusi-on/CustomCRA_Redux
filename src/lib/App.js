@@ -1,20 +1,27 @@
 import Css from "lib/App.module.scss";
 
 import * as History from "history";
-import * as MobX from "mobx";
-import { Provider } from "mobx-react";
+import * as Store from "store";
+import { Provider } from "react-redux";
 import { bind } from "decko";
+import Config from "const/Config";
 import Header from "lib/Header";
-import MainStore from "stores/MainStore";
 import React, { Component } from "react";
 import Routes from "lib/Routes";
+import Utils from "utils/Utils";
 
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.store = new MainStore();
+    let userData = null;
+    try {
+      userData = JSON.parse(Utils.storageValue(Config.AUTH_LS_KEY));
+    } catch (exception) {}
     this.history = History.createBrowserHistory();
-    MobX.configure({ enforceActions: "always" });
+    this.store = Store.createStore({
+      history: this.history,
+      userData
+    });
   }
 
   render() {

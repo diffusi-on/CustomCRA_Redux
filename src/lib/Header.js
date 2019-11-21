@@ -2,13 +2,14 @@ import Css from "lib/Header.module.scss";
 
 import logo from "assets/logo.svg";
 
+import * as MainActions from "actions/main";
+import * as ReactRedux from "react-redux";
 import { bind } from "decko";
-import { inject, observer } from "mobx-react";
 import React, { Component } from "react";
 
-export default @inject("store") @observer class Header extends Component {
+class Header extends Component {
   render() {
-    const { user } = this.props.store;
+    const { user } = this.props;
     return (
       <header className={Css.header} onClick={this.props.onClick}>
         <img src={logo} className={Css.logo} alt="logo" />
@@ -22,6 +23,13 @@ export default @inject("store") @observer class Header extends Component {
 
   @bind
   handleLogoutTextClick() {
-    this.props.store.logoutUser();
+    this.props.dispatch(MainActions.logoutUser());
   }
 }
+
+export default ReactRedux.connect(
+  ({ main }) => ({
+    user: main.user
+  }),
+  (dispatch) => ({ dispatch })
+)(Header);
