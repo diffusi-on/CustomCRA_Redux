@@ -1,0 +1,12 @@
+@import "config";
+
+.dataPage {
+  table {
+    width: $contentMinWidth - ($contentDefaultIndent * 2);
+    margin: $contentDefaultIndent auto;
+    text-align: left;
+  }
+  .counter {
+    margin-top: $contentDefaultIndent;
+  }
+}

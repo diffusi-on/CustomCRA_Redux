@@ -1,0 +1,34 @@
+//Общий модуль, тут стили, которые используются глобально, в разных частях проекта
+@import "config";
+
+.flexCenter {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  appearance: none;
+  margin: $contentDefaultIndent / 2;
+  padding: $contentDefaultIndent;
+  border: 2px solid $uiBorderColor;
+  border-radius: $contentDefaultIndent;
+  background: $uiDarkColor;
+  color: $uiLightColor;
+  text-transform: uppercase;
+  cursor: pointer;
+  &:not([disabled]) {
+    &:active {
+      border-color: $uiLightColor;
+    }
+  }
+}
+
+.highlight {
+  color: $uiHighlightColor;
+}
+
+.page {
+  margin: $contentDefaultIndent 0;
+}
